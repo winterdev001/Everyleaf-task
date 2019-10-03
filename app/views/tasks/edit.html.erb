@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-center mt-5">
+  <div class="card col-5">
+    <h3 class="card-header text-center">Edit Task</h3>
+    <div class="card-body">
+      <%= render 'form', task: @task %>
+      <span class="col-12">
+        <%= link_to 'Back', tasks_path, class:"btn btn-dark rounded-pill btn-block"%>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<% @tasks.each do |task|%> 
+  Task name: <%= task.task_name %>  <br>
+  Label name: <%= task.label_name %>  <br>
+  Start date: <%= task.start_date %>  <br>
+  End date: <%= task.end_date %><br>
+  Status: <%= task.status %><br> 
+  <%= link_to "Edit",edit_task_path(task) %> |
+  <%= link_to "Show",task %> |
+  <%= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <hr>   
+<% end %>
+<%= link_to "New Task",new_task_path %><br>
+
+<%= t ('view.sample') %>

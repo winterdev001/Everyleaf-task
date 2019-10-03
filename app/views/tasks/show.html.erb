@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-center">
+  <div class="card col-6 mt-3 ">
+    <p class="card-body text-center">      
+      Task name: <%= @task.task_name %>  <br>
+      Label name: <%= @task.label_name %>  <br>
+      Start date: <%= @task.start_date %>  <br>
+      End date: <%= @task.end_date %><br>
+      Status: <%= @task.status %><br>    
+    </p>  
+    <%= link_to 'Back', tasks_path , class: "btn btn-dark"%>  
+  </div>
+</div>

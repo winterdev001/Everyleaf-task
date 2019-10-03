@@ -1,0 +1,9 @@
+ <div class="navbar nav">  
+  <%= content_tag :li do %>
+    <%= link_to 'Switch to English',locale: :en %>
+  <% end  unless current_page?(locale: :en) %>
+
+  <%= content_tag :li do %>
+    <%= link_to 'Switch to japanese',locale: :ja %>
+  <% end  unless current_page?(locale: :ja) %>
+</div>

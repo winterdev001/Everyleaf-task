@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TaskApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" %>
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"  %>
+    <%= javascript_include_tag "https://code.jquery.com/jquery-3.3.1.slim.min.js"  %>
+    <%= javascript_include_tag "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"  %>
+  </head>
+
+  <body>
+    <% if flash[:notice] %>
+      <div class="bg-success card col-10 mt-2 d-flex justify-content-center"   >
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="bg-danger card col-12 mt-2 d-flex justify-content-center" >
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
