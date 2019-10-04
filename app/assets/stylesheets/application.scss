@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+body {
+    // width: 100vh;
+}
+
+.task-card {
+    // width: 20rem !important;
+}
+
+.new-task {
+    animation-delay: 5s;
+}

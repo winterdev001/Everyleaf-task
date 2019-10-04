@@ -1,14 +1,24 @@
-<% @tasks.each do |task|%> 
-  Task name: <%= task.task_name %>  <br>
-  Label name: <%= task.label_name %>  <br>
-  Start date: <%= task.start_date %>  <br>
-  End date: <%= task.end_date %><br>
-  Status: <%= task.status %><br> 
-  <%= link_to "Edit",edit_task_path(task) %> |
-  <%= link_to "Show",task %> |
-  <%= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <hr>   
-<% end %>
-<%= link_to "New Task",new_task_path %><br>
+<div class="container">
+  <div class="text-center">
+    <%= link_to "New Task",new_task_path,class:"btn btn-dark btn-block  mt-3 animated  flash new-task fixed-top" %><br>
+  </div>
+  <div class="card-columns mt-5  ml-2">
+    <% @tasks.each do |task|%> 
+      <div class="card " style="width: 22rem !important;">
+        <div class="card-body">              
+            <p><img src="https://img.icons8.com/wired/20/000000/bank-card-back-side.png">Label name: <%= task.label_name %>  </p>
+            <p><img src="https://img.icons8.com/dotty/20/000000/tags.png">Task name: <%= task.task_name %>  </p>
+            <p><img src="https://img.icons8.com/ios/20/000000/date-from.png">Start date: <%= task.start_date %>  </p>
+            <p><img src="https://img.icons8.com/wired/20/000000/date-span.png">End date: <%= task.end_date %></p>
+            <p><img src="https://img.icons8.com/ios/20/000000/connection-status-off.png">Status: <%= task.status %></p> 
+            <div class="text-center">   
+              <%= link_to image_tag("https://img.icons8.com/wired/25/000000/edit.png"),edit_task_path(task) , class:"btn btn-warning "%> 
+              <%= link_to image_tag("https://img.icons8.com/dotty/25/000000/visible.png"),task ,class:"btn btn-warning"%> 
+              <%= link_to image_tag("https://img.icons8.com/wired/25/000000/trash.png"), task, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %>  
+            </div> 
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<%= t ('view.sample') %>

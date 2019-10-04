@@ -1,32 +1,32 @@
 <%= form_with(model: @task, local: true) do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
       <ul>
         <% @task.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <li class="text-danger"><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.text_field :task_name , placeholder:"Task name" %>
+  <div class="form-group">
+    <%= form.text_field :task_name , placeholder:"Task name", class: "form-control" %>
   </div>
-  <div class="field">
-    <%= form.text_field :label_name ,placeholder:"Label name" %>
+  <div class="form-group">
+    <%= form.text_field :label_name ,placeholder:"Label name", class: "form-control" %>
   </div>
-  <div class="field">
-    <%= form.date_field :start_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+  <div class="form-group">
+    <%= form.date_field :start_date, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"), class: "form-control" %>
   </div>
-  <div class="field">
-    <%= form.date_field :end_date, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+  <div class="form-group">
+    <%= form.date_field :end_date, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"), class: "form-control" %>
   </div>
-  <div class="field">
-    <%= form.text_field :status ,placeholder:"Status" %>
+  <div class="form-group">
+    <%= form.text_field :status ,placeholder:"Status", class: "form-control" %>
   </div>
   <hr>  
-  <div class="actions">
-    <%= form.submit "Create Task"  %>    
+  <div class="actions text-center">
+    <%= form.submit  class:"btn btn-dark btn-block rounded-pill"  %>    
   </div>
 <% end %>
+   
