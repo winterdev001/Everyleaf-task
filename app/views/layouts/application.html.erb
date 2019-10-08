@@ -9,6 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <%= stylesheet_link_tag "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
     <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"  %>
     <%= javascript_include_tag "https://code.jquery.com/jquery-3.3.1.slim.min.js"  %>
     <%= javascript_include_tag "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"  %>    
@@ -16,12 +17,12 @@
 
   <body>
     <% if flash[:notice] %>
-      <div class="bg-success card col-10 mt-2 d-flex justify-content-center"   >
+      <div class="bg-success card col-12 mt-5 d-flex justify-content-center"   >
         <p class="notice"><%= notice %></p>
       </div>
     <% end %>
     <% if flash[:alert] %>
-      <div class="bg-danger card col-12 mt-2 d-flex justify-content-center" >
+      <div class="bg-danger card col-12 mt-5 d-flex justify-content-center" >
         <p class="alert"><%= alert %></p>
       </div>
     <% end %>

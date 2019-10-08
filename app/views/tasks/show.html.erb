@@ -4,7 +4,10 @@
       Task name: <%= @task.task_name %>  <br>
       Label name: <%= @task.label_name %>  <br>
       Start date: <%= @task.start_date %>  <br>
-      End date: <%= @task.end_date %><br>
+      <%if @task.deadline.present?%>
+        Deadline: <%= @task.deadline %><br>
+      <%else%>
+      <%end%>
       Status: <%= @task.status %><br>    
     </p>  
     <%= link_to 'Back', tasks_path , class: "btn btn-dark"%>  
