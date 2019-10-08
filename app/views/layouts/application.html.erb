@@ -16,14 +16,17 @@
   </head>
 
   <body>
+    <header>
+      <%= render "navigation"%>
+    </header>
     <% if flash[:notice] %>
-      <div class="bg-success card col-12 mt-5 d-flex justify-content-center"   >
-        <p class="notice"><%= notice %></p>
+      <div class="bg-success card col-12  d-flex justify-content-center"   >
+        <p class="notice text-center"><%= notice %></p>
       </div>
     <% end %>
     <% if flash[:alert] %>
-      <div class="bg-danger card col-12 mt-5 d-flex justify-content-center" >
-        <p class="alert"><%= alert %></p>
+      <div class="bg-danger card col-12  d-flex justify-content-center" >
+        <p class="alert text-center"><%= alert %></p>
       </div>
     <% end %>
     <%= yield %>
