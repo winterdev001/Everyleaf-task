@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  # get 'deadlines/new'
+  # get 'deadlines/update'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+  # scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     root 'tasks#index'
-    resources :tasks
-  end
+     match '/sorted' => 'tasks#sorted', via: :get
+    resources :tasks 
+  # end
 end
