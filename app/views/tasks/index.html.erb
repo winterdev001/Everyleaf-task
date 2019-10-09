@@ -1,11 +1,14 @@
 <div class="container">
-  <div class="">          
-    <p>
-        Sort by: &nbsp;
-        <%= link_to 'Deadline',sorted_path , class:"btn btn-light" %>
-        <%= link_to 'Created Date',tasks_path , class:"btn btn-light"%>  
-    </p>  
-  </div><br>
+  <div class="row mt-3">
+    <div class="col-md-6">          
+      <p>
+          Sort by: &nbsp;
+          <%= link_to 'Deadline',sorted_path , class:"btn btn-light" %>
+          <%= link_to 'Created Date',tasks_path , class:"btn btn-light"%>  
+      </p>  
+    </div><br>
+    
+  </div>
   <div class="">
     <table class="table table-sm all-tasks mt-2 mb-5">
         <thead>
@@ -27,11 +30,7 @@
             <td><%= task.label_name%></td>
             <td><%= task.start_date.strftime("%B %e, %Y")%></td>
             <td>
-                <%if task.deadline.present?%>  
-                <%= task.deadline.strftime("%B %e, %Y")  %>              
-                <%else%>
-                <%= link_to "Add Deadline",edit_task_path(task) , class:"btn btn-warning  "%><br>
-                <%end%>
+                <%= task.deadline.strftime("%B %e, %Y")  %>               
             </td>
             <td><%= task.status%></td>
             <td><%= link_to image_tag("https://img.icons8.com/dotty/25/000000/visible.png"),task ,class:"btn btn-warning"%></td>

@@ -16,11 +16,12 @@
     <%= form.text_field :label_name ,placeholder:"Label name", class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= form.date_field :start_date, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"), class: "form-control" %>
+    <label>Start Date</label><br>
+    <%= form.date_field :start_date, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"),placeholder:"Start Date", class: "form-control" %>
   </div>
   <div class="form-group">
-    <label>Start date</label><br>
-    <%= form.hidden_field :deadline, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"), class: "form-control" %>
+    <label>Deadline</label><br>
+    <%= form.date_field :deadline, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"),placeholder:"Deadline", class: "form-control" %>
   </div>
   <div class="form-group">
     <%= form.text_field :status ,placeholder:"Status", class: "form-control" %>
