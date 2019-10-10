@@ -1,12 +1,14 @@
-<%= render "navigation"%>
 <div class="container">
-  <div class="">          
-    <p>
-        Sort by: &nbsp;
-        <%= link_to 'Deadline',sorted_path , class:"btn btn-light" %>
-        <%= link_to 'Created Date',tasks_path , class:"btn btn-light"%>  
-    </p>  
-  </div><br>
+  <div class="row mt-3">
+    <div class="col-md-6">          
+      <p>
+          Sort by: &nbsp;
+          <%= link_to 'Deadline',sorted_path , class:"btn btn-light" %>
+          <%= link_to 'Created Date',tasks_path , class:"btn btn-light"%>  
+      </p>  
+    </div><br>
+    
+  </div>
   <div class="">
     <table class="table table-sm all-tasks mt-2 mb-5">
         <thead>

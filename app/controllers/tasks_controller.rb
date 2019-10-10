@@ -3,11 +3,16 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all.order("created_at DESC")
+     if params[:search]
+      @tasks = Task.search(params[:search]).order("created_at DESC")
+    else
+      @tasks = Task.all.order('created_at DESC')
+    end
+    # @tasks = Task.all.order("created_at DESC")
   end
 
   def sorted
-    @task = Task.all.order("deadline DESC")
+    @task = Task.all.order("deadline ASC")
   end
 
   def new 
@@ -24,15 +29,25 @@ class TasksController < ApplicationController
   def create    
     @task = Task.new(task_params)  
     if @task.save
-      redirect_to tasks_path, notice: 'Task was successfully created.' 
+      redirect_to root_path, notice: 'Task was successfully created.' 
     else
       render :new 
     end     
   end
+
+  def deadline
+    # @taskdeadline = Task.new(task_params) 
+    @task = Task.find(params[:id]) 
+    if @task.update(deadline_params)
+      redirect_to root_path, notice: 'Deadline was successfully created.' 
+    else
+      render :new 
+    end 
+  end
   
   def update    
     if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.' 
+      redirect_to root_path, notice: 'Task was successfully updated.' 
     else
       render :edit      
     end   
@@ -50,6 +65,10 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:task_name,:label_name, :start_date, :deadline, :status)    
+  end
+
+  def deadline_params
+    params.require(:task).permit(:deadline)
   end
 
 end
