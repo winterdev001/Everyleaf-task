@@ -20,6 +20,7 @@ RSpec.feature "Task management function", type: :feature do
     fill_in 'task[label_name]', :with => 'sample'
     fill_in 'task[start_date]', :with => '2019-10-5 1:40:00'
     fill_in 'task[status]', :with => 'started'
+    fill_in 'task[deadline]', :with => '2019-10-15 5:40:00'
     
     click_on 'Create Task'
     
