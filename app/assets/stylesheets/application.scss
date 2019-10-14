@@ -28,5 +28,9 @@ body {
 
 .all-tasks {
     // height: 2rem !important;
-// width: 60rem !important;
+    // width: 60rem !important;
+}
+
+.search::first-letter {
+    text-transform: uppercase;
 }

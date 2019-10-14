@@ -6,8 +6,15 @@
           <%= link_to 'Deadline',"sorted" , class:"btn btn-light" %>
           <%= link_to 'Created Date',tasks_path , class:"btn btn-light"%>  
       </p>  
-    </div><br>
-    
+    </div>
+    <div class="col-md-6">
+      <%= form_tag tasks_path, :method => 'get', :id => "products_search" do %>
+        <p class="form-group row">
+          <%= text_field_tag :search, params[:search] ,placeholder:"Search...", class:"form-control col-4 search"%>
+          <%= submit_tag "Search", :task_name => nil, class:"btn btn-dark col-3" %>
+        </p>
+      <% end %>
+    </div>    
   </div>
   <div class="">
     <table class="table table-sm all-tasks mt-2 mb-5">
