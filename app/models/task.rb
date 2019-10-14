@@ -8,7 +8,7 @@ class Task < ApplicationRecord
 
     def self.search(search)
       if search
-          where('task_name LIKE ?', "%#{search}%")
+          where('task_name || status LIKE ?', "%#{search}%")
       else
           scoped
       end
