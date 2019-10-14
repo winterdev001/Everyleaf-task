@@ -15,14 +15,7 @@ ActiveRecord::Schema.define(version: 2019_10_09_125916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "deadlines", force: :cascade do |t|
-    t.datetime "deadline"
-    t.bigint "task_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_deadlines_on_task_id"
-  end
-
+ 
   create_table "tasks", force: :cascade do |t|
     t.string "task_name", null: false
     t.string "label_name"
@@ -33,5 +26,4 @@ ActiveRecord::Schema.define(version: 2019_10_09_125916) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "deadlines", "tasks"
 end
