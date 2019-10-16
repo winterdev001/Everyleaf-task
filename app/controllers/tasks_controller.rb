@@ -3,11 +3,15 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-     if params[:search]
-      @tasks = Task.search(params[:search]).order("created_at DESC")
-     else
-      @tasks = Task.all.order('created_at DESC')
-     end
+    #  if params[:q]
+    #   # @tasks = Task.search(params[:search]).order("created_at DESC")
+    #   @search = Task.search(params[:q])
+    #   @tasks = @search.result
+    #  else
+    #   @tasks = Task.all.order('created_at DESC')
+    #  end
+    @search = Task.search(params[:q])
+    @tasks = @search.result
     # @tasks = Task.all.order("created_at DESC")
   end
 

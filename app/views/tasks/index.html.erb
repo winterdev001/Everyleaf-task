@@ -1,19 +1,32 @@
 <div class="container">
   <div class="row mt-3">
-    <div class="col-md-6">          
+    <div class="col-md-4">          
       <p>
           Sort by: &nbsp;
           <%= link_to 'Deadline',"sorted" , class:"btn btn-light" %>
           <%= link_to 'Created Date',tasks_path , class:"btn btn-light"%>  
       </p>  
     </div>
-    <div class="col-md-6">
-      <%= form_tag tasks_path, :method => 'get', :id => "products_search" do %>
-        <p class="form-group row">
-          <%= text_field_tag :search, params[:search] ,placeholder:"Search...", class:"form-control col-4 search"%>
-          <%= submit_tag "Search", :task_name => nil, class:"btn btn-dark col-3" %>
-        </p>
-      <% end %>
+    <div class="col-md-8 ">
+      <%= search_form_for @search do |f|%>
+        <div class="card" style="width:46rem;">
+          <div class="card-body row search">
+          <div class="form-group col-md-3">
+            <%= f.label :task_name_cont, "Search by Task_name"%>          
+            <%= f.text_field :task_name_cont ,class:"form-control"%>
+            </div>
+            <div class="form-group col-md-3">
+              <%= f.label :status_cont, "Search by Status"%>
+              <%= f.text_field :status_cont ,class:"form-control" %>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :task_name_or_status_cont, "Search by Task_name or Status"%>
+              <%= f.text_field :task_name_or_status_cont ,class:"form-control" %>
+            </div>
+          </div>
+          <div class="actions"><%= f.submit "Search", class:"btn btn-dark btn-block" %></div>
+        </div>
+      <%end%>
     </div>    
   </div>
   <div class="">

@@ -31,6 +31,6 @@ body {
     // width: 60rem !important;
 }
 
-.search::first-letter {
-    text-transform: uppercase;
+.search>.form-control {
+    width: 15rem;
 }
