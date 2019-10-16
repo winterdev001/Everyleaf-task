@@ -61,4 +61,25 @@ RSpec.feature "Task management function", type: :feature do
 
     Task.all.order("created_at DESC")
   end
+
+  scenario "Search by title" do
+    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    visit tasks_path
+    fill_in "Search by Task_name" , :with =>"task_01"
+    expect(page).to have_content "task_01"
+  end
+
+  scenario "Search by title" do
+    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    visit tasks_path
+    fill_in "Search by Status" , :with =>"not started"
+    expect(page).to have_content "not started"
+  end
+
+  scenario "Search by title or status" do
+    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    visit tasks_path
+    fill_in "Search by Task_name or Status" , :with =>"task_01"
+    expect(page).to have_content "task_01"
+  end
 end
