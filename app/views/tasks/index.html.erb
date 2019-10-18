@@ -3,8 +3,9 @@
     <div class="col-md-4">          
       <p>
           Sort by: &nbsp;
-          <%= link_to 'Deadline',"sorted" , class:"btn btn-light" %>
-          <%= link_to 'Created Date',tasks_path , class:"btn btn-light"%>  
+          <%= link_to 'Created Date ',tasks_path(sort_with_created_date:"true") , class:"btn btn-light btn-block" %>
+          <%= link_to 'Deadline',tasks_path(sort_with_deadline:"true") , class:"btn btn-light btn-block"%>  
+          <%= link_to 'Priority',tasks_path(sort_with_priority:"true") , class:"btn btn-light btn-block"%>  
       </p>  
     </div>
     <div class="col-md-8 ">
@@ -38,6 +39,7 @@
             <th>Starts on</th>
             <th>Deadline</th>
             <th>Status</th>
+            <th>Priority</th>
             <th>View</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -53,6 +55,7 @@
                 <%= task.deadline.strftime("%B %e, %Y")  %>               
             </td>
             <td><%= task.status%></td>
+            <td><%= task.priority%></td>
             <td><%= link_to "Show",task ,class:"btn btn-warning"%></td>
             <td><%= link_to "Edit",edit_task_path(task) , class:"btn btn-warning "%></td>
             <td><%= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %></td>

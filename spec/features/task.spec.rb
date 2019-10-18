@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.feature "Task management function", type: :feature do
   # In scenario (alias of it), write the processing of the test for each item you want to check.
   scenario "Test task list" do
-    Task.create!(task_name: 'task_01', label_name: 'test',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
-    Task.create!(task_name: 'task_02', label_name: 'sample',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    Task.create!(task_name: 'task_01', label_name: 'test',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High')
+    Task.create!(task_name: 'task_02', label_name: 'sample',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High')
 
     visit tasks_path
 
@@ -29,7 +29,7 @@ RSpec.feature "Task management function", type: :feature do
   end
 
   scenario "Test task details" do
-    Task.create!(task_name: 'task_02', label_name: 'sample',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    Task.create!(task_name: 'task_02', label_name: 'sample',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High')
     visit '/tasks'  
      
     click_link "Show"
@@ -39,14 +39,14 @@ RSpec.feature "Task management function", type: :feature do
   end
 
   scenario "Test whether tasks are arranged in descending order of creation date" do
-    Task.create!( task_name: 'task_01', label_name: 'test1', created_at: '2019-09-30 3:40:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
-    Task.create!( task_name: 'task_02', label_name: 'sample1', created_at:'2019-09-30 10:41:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    Task.create!( task_name: 'task_01', label_name: 'test1', created_at: '2019-09-30 3:40:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00', priority: 'High')
+    Task.create!( task_name: 'task_02', label_name: 'sample1', created_at:'2019-09-30 10:41:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High')
 
     Task.all.order("created_at DESC")
   end
 
   scenario "Test task's deadline  creation" do
-    task = Task.create!( task_name: 'task_01', label_name: 'test1', created_at: '2019-09-30 3:40:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    task = Task.create!( task_name: 'task_01', label_name: 'test1', created_at: '2019-09-30 3:40:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00', priority: 'High')
     visit edit_task_path(task.id)
     fill_in 'task[deadline]', :with => '2019-10-5 1:40:00'
     
@@ -56,30 +56,37 @@ RSpec.feature "Task management function", type: :feature do
   end
 
   scenario "Test whether tasks are arranged in descending order of deadline date" do
-    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
-    Task.create!( task_name: 'task_02', label_name: 'sample1',start_date: '2019-10-10 2:40:00',status: 'not started', deadline:'2019-10-16 5:40:00')
+    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High')
+    Task.create!( task_name: 'task_02', label_name: 'sample1',start_date: '2019-10-10 2:40:00',status: 'not started', deadline:'2019-10-16 5:40:00' , priority: 'High')
 
     Task.all.order("created_at DESC")
   end
 
   scenario "Search by title" do
-    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High')
     visit tasks_path
     fill_in "Search by Task_name" , :with =>"task_01"
     expect(page).to have_content "task_01"
   end
 
   scenario "Search by title" do
-    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High')
     visit tasks_path
     fill_in "Search by Status" , :with =>"not started"
     expect(page).to have_content "not started"
   end
 
   scenario "Search by title or status" do
-    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00')
+    Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00', priority: 'High')
     visit tasks_path
     fill_in "Search by Task_name or Status" , :with =>"task_01"
     expect(page).to have_content "task_01"
+  end
+
+  scenario "Test whether tasks are arranged in Ascending order of Priority" do
+    Task.create!( task_name: 'task_01', label_name: 'test1', created_at: '2019-09-30 3:40:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00', priority: 'High')
+    Task.create!( task_name: 'task_02', label_name: 'sample1', created_at:'2019-09-30 10:41:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00', priority: 'High')
+
+    Task.all.order("priority DESC")
   end
 end
