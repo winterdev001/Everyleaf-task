@@ -85,8 +85,9 @@ RSpec.feature "Task management function", type: :feature do
 
   scenario "Test whether tasks are arranged in Ascending order of Priority" do
     Task.create!( task_name: 'task_01', label_name: 'test1', created_at: '2019-09-30 3:40:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00', priority: 'High')
-    Task.create!( task_name: 'task_02', label_name: 'sample1', created_at:'2019-09-30 10:41:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00', priority: 'High')
+    Task.create!( task_name: 'task_02', label_name: 'sample1', created_at:'2019-09-30 10:41:00',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00', priority: 'Low')
 
-    Task.all.order("priority DESC")
+    task = Task.all
+    assert task.order('priority ASC')
   end
 end
