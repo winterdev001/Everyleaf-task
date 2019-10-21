@@ -14,4 +14,10 @@ class Task < ApplicationRecord
     #   end
     # end
 
+    def sort
+      task = []
+      task = Task.priority
+      @tasks = task.split(",").reverse.join(",").order("DESC")
+    end
+
 end

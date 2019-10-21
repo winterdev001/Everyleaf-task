@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  helper_method :sortable
+
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -12,7 +12,7 @@ class TasksController < ApplicationController
     elsif params[:sort_with_deadline]
       @tasks = Task.order('deadline ASC')
     else params[:sort_with_priority]
-      @tasks = Task.order('priority ASC')
+      @tasks = Task.order('priority ASC')     
     end
     # @search = Task.search(params[:q])
     # @tasks = @search.result
