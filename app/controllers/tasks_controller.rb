@@ -8,11 +8,11 @@ class TasksController < ApplicationController
     # @tasks = Task.search(params[:search]).order("created_at DESC")
       @tasks = @search.result
     elsif params[:sort_with_created_at]
-      @tasks = Task.order('created_at DESC')
+      @tasks = Task.order('created_at DESC').page(params[:page])
     elsif params[:sort_with_deadline]
-      @tasks = Task.order('deadline ASC')
+      @tasks = Task.order('deadline ASC').page(params[:page])
     else params[:sort_with_priority]
-      @tasks = Task.order('priority ASC')     
+      @tasks = Task.order('priority ASC').page(params[:page])    
     end
     # @search = Task.search(params[:q])
     # @tasks = @search.result
