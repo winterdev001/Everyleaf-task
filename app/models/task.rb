@@ -14,6 +14,6 @@ class Task < ApplicationRecord
     #   end
     # end
 
-    paginates_per 5
+    paginates_per 2
 
 end

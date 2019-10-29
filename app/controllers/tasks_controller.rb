@@ -16,7 +16,10 @@ class TasksController < ApplicationController
     end
     # @search = Task.search(params[:q])
     # @tasks = @search.result
-    # @tasks = Task.all.order("created_at DESC")
+    # @task = Task.all.order("created_at DESC").page(params[:page]) 
+    @tasks = Task.where(status:"not started").or(Task.where(status: "on going")).page(params[:page])
+    @finished = Task.where(status: "finished")
+    @progress = Task.where(status:"not started").or(Task.where(status: "on going")).size
   end
 
   def sorted
