@@ -1,78 +1,81 @@
-<div class="container">
-  <div class="row mt-3">
-    <div class="col-md-4">          
-      <p>
-          Sort by: &nbsp;
-          <%= link_to 'Created Date ',tasks_path(sort_with_created_date:"true") , class:"btn btn-light btn-block" %>
-          <%= link_to 'Deadline',tasks_path(sort_with_deadline:"true") , class:"btn btn-light btn-block"%>  
-          <%= link_to 'Priority',tasks_path(sort_with_priority:"true") , class:"btn btn-light btn-block"%>  
-      </p>  
-    </div>
-    <div class="col-md-8 ">
-      <%= search_form_for @search do |f|%>
-        <div class="card" style="width:46rem;">
-          <div class="card-body row search">
-          <div class="form-group col-md-3">
-            <%= f.label :task_name_cont, "Search by Task_name"%>          
-            <%= f.text_field :task_name_cont ,class:"form-control"%>
-            </div>
-            <div class="form-group col-md-3">
-              <%= f.label :status_cont, "Search by Status"%>
-              <%= f.text_field :status_cont ,class:"form-control" %>
-            </div>
-            <div class="form-group col-md-6">
-              <%= f.label :task_name_or_status_cont, "Search by Task_name or Status"%>
-              <%= f.text_field :task_name_or_status_cont ,class:"form-control" %>
-            </div>
+<div class="content">
+  <div class="row ml-4 ">
+    <div class="col-md-6">  
+      <div class="card  progress-card" style="width:41rem;">
+        <h2 class="card-header">All Unfished Tasks</h2>
+        <div class="card-body">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: <%= @progress %>%" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100"><div class="text-center" ><%= @progress %>%</div></div>
           </div>
-          <div class="actions"><%= f.submit "Search", class:"btn btn-dark btn-block" %></div>
         </div>
-      <%end%>
-    </div>    
-  </div>
-  <div class="">
-    <table class="table table-sm all-tasks mt-2 mb-5">
-        <thead>
-        <tr>
-            <th>Task name</th>
-            <th>Label name</th>
-            <th>Starts on</th>
-            <th>Deadline</th>
-            <th>Status</th>
-            <th>Priority</th>
-            <th>View</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @tasks.each do |task|%> 
-            <tr>
-            <td><%= task.task_name%></td>
-            <td><%= task.label_name%></td>
-            <td><%= task.start_date.strftime("%B %e, %Y")%></td>
-            <td>
-                <%= task.deadline.strftime("%B %e, %Y")  %>               
-            </td>
-            <td><%= task.status%></td>
-            <td>
-              <%if task.priority == "1"%>
-                <%=  task.priority = "High"%>
-              <%elsif task.priority == "2"%>
-                <%=  task.priority = "Medium"%>
-              <%elsif task.priority == "3"%>
-                <%=  task.priority = "Low"%>
-              <%else%>
-              <%end%>
-            </td>
-            <td><%= link_to "Show",task ,class:"btn btn-warning"%></td>
-            <td><%= link_to "Edit",edit_task_path(task) , class:"btn btn-warning "%></td>
-            <td><%= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %></td>
-            </tr>
-        <%end%>
-        </tbody>
-    </table>
-    <%= paginate @tasks%>
-  </div>
-  </div>
+      </div>
 
+      <table class="">    
+        <tbody class="card in-progress-main-card " style="width:41rem;">
+          <tr class="card-header ">
+            <th><b>In Progress</b></th>
+          </tr>
+          <% @tasks.each do |task|%> 
+              <tr  class="card  pending-card  " >
+                <td class="card-body in-progress">
+                  <b class="text-light"><%= task.task_name%></b>
+                  <%= link_to image_tag("https://img.icons8.com/material-outlined/25/000000/visible.png"),task,class:"bg-light  right rounded-circle badge"%>
+                  <%= link_to image_tag("https://img.icons8.com/metro/26/000000/pencil.png"),edit_task_path(task), class:"bg-primary  right rounded-circle badge"%>
+                  <%= link_to image_tag("https://img.icons8.com/windows/25/000000/trash.png"),task, method: :delete, data: { confirm: 'Are you sure?' },class:"bg-danger right rounded-circle badge" %>  
+                  <br>
+                  <%= task.label_name%><br>
+                  <%= task.start_date.strftime("%B %e, %Y")%><br>          
+                  <%= task.deadline.strftime("%B %e, %Y")  %> <br>        
+                  <span><%= task.status%><br>         
+                    <%if task.priority == "1"%>
+                      <%=  task.priority = "High"%>
+                    <%elsif task.priority == "2"%>
+                      <%=  task.priority = "Medium"%>
+                    <%elsif task.priority == "3"%>
+                      <%=  task.priority = "Low"%>
+                    <%else%>
+                    <%end%></span>
+                </td>          
+              </tr>
+          <%end%>
+          <hr>      
+        </tbody>           
+      </table>
+      <div class="d-flex justify-content-center">
+      <%= paginate @tasks%> 
+      </div> 
+    </div>
+
+    <div class="col-md-6">    
+      <table class="">    
+        <tbody class="card finished-card" style="width:30rem;">
+          <tr class="card-header ">
+            <th ><b>Finished</b></th>
+          </tr>
+          <% @finished.each do |task|%> 
+              <tr  class="card  pending-card finished-card-body " >
+                <td class="card-body in-progress">
+                  <b class="text-light"><%= task.task_name%></b>              
+                  <%= link_to image_tag("https://img.icons8.com/windows/25/000000/trash.png"),task, method: :delete, data: { confirm: 'Are you sure?' },class:"bg-danger float-right rounded-circle badge" %>  
+                  <br>
+                  <%= task.label_name%><br>
+                  <%= task.start_date.strftime("%B %e, %Y")%><br>          
+                  <%= task.deadline.strftime("%B %e, %Y")  %> <br>        
+                  <span><%= task.status%>         
+                    <%if task.priority == "1"%>
+                      <%=  task.priority = "High"%>
+                    <%elsif task.priority == "2"%>
+                      <%=  task.priority = "Medium"%>
+                    <%elsif task.priority == "3"%>
+                      <%=  task.priority = "Low"%>
+                    <%else%>
+                    <%end%></span>
+                </td>          
+              </tr>
+          <%end%>
+          <hr>      
+        </tbody>      
+      </table> 
+    </div>
+  </div>
+</div>

@@ -10,10 +10,10 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.text_field :task_name , placeholder:"Task name", class: "form-control" %>
+    <%= form.text_field :task_name , placeholder:"Task name", class: "form-control input" %>
   </div>
   <div class="form-group">
-    <%= form.text_field :label_name ,placeholder:"Label name", class: "form-control" %>
+    <%= form.text_field :label_name ,placeholder:"Label name", class: "form-control input" %>
   </div>
   <div class="form-group">
     <label>Start Date</label><br>
@@ -23,18 +23,22 @@
     <label>Deadline</label><br>
     <%= form.date_field :deadline, as: :date, value: form.object.try(:strftime,"%d/%m/%Y"),placeholder:"Deadline", class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= form.text_field :status ,placeholder:"Status", class: "form-control" %>
+  <div class="form-group ">
+    <b>Status</b><br />
+    <%= form.radio_button :status, 'not started' %> Not Started
+    <%= form.radio_button :status, 'on going' %> On Going
+    <%= form.radio_button :status, 'finished' %> Finished<br />
   </div>
   <div class="form-group">
     <b>Priority</b><br />
-    <%= form.radio_button :priority, '3' %> Low<br />
-    <%= form.radio_button :priority, '2' %> Medium<br />
+    <%= form.radio_button :priority, '3' %> Low
+    <%= form.radio_button :priority, '2' %> Medium
     <%= form.radio_button :priority, '1' %> High<br />
   </div>
   <hr>  
   <div class="actions text-center">
-    <%= form.submit  class:"btn btn-dark btn-block rounded-pill"  %>    
+    <%= form.submit  class:"btn btn-dark  "  %>     
+    <%= link_to 'Back', tasks_path, class:"btn btn-dark  "%>     
   </div>
 <% end %>
    
