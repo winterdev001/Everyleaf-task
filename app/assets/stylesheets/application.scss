@@ -134,15 +134,32 @@ Sidebar Nav
     margin-top: 2rem;
 }
 
+.progress-card>.card-header {
+    color: black;
+}
+
+.in-progress-card {
+    height: 27.7rem;
+    margin-top: 2rem;
+    font-size: 15px;
+    color: rgb(187, 183, 183);
+    font-family: Roboto, sans-serif;
+}
+
+.in-progress-card>.card-header {
+    color: black !important;
+}
+
 .finished-card {
     margin-left: 6rem;
     background-color: #41385A !important;
-    height: 33.6rem;
+    height: 36.5rem;
     margin-bottom: 2rem !important;
+    margin-top: 2rem;
 }
 
 .finished-card-body {
-    overflow-y: scroll;
+    // overflow-y: scroll;
     color: rgb(172, 163, 163);
 
 }
@@ -168,16 +185,21 @@ Sidebar Nav
 //     background-color: darkgrey;
 //     outline: 1px solid slategrey;
 // }
+.finished-task {
+    overflow-y: scroll;
+    height: 26rem;
+    color: rgb(172, 163, 163);
+}
 
-.finished-card-body::-webkit-scrollbar {
+.finished-task::-webkit-scrollbar {
     width: .2em;
 }
 
-.finished-card-body::-webkit-scrollbar-track {
+.finished-task::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-.finished-card-body::-webkit-scrollbar-thumb {
+.finished-task::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }
@@ -202,7 +224,8 @@ Sidebar Nav
     border-right: none !important;
     border-bottom: 1px solid #0B0720 !important;
     background-color: #41385A !important;
-    color: black !important;
+    color: white !important;
+    font-size: 18px;
 }
 
 .right {
