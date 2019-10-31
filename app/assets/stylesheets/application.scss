@@ -3,7 +3,7 @@
 body {
     font-family: "Lato";
     font-size: 100%;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     overflow-x: hidden;
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -119,7 +119,7 @@ Sidebar Nav
 }
 
 .content {
-    margin-top: 3rem;
+    // margin-top: 2.5rem;
     font-size: 17px;
 }
 
@@ -240,4 +240,8 @@ Sidebar Nav
     border-radius: 6px;
     height: 2.5rem;
     color: aliceblue !important;
+}
+
+.notice {
+    margin-top: 5rem;
 }
