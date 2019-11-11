@@ -18,21 +18,19 @@ RSpec.feature "Task management function", type: :feature do
     visit new_task_path
     fill_in 'task[task_name]', :with => 'test'
     fill_in 'task[label_name]', :with => 'sample'
-    fill_in 'task[start_date]', :with => '2019-10-5 1:40:00'
-    fill_in 'task[status]', :with => 'started'
+    fill_in 'task[start_date]', :with => '2019-10-5 1:40:00'   
     fill_in 'task[deadline]', :with => '2019-10-15 5:40:00'
     
     click_on 'Create Task'
     
     expect(page).to have_content'test'
-    expect(page).to have_content'sample'
   end
 
   scenario "Test task details" do
     Task.create!(task_name: 'task_02', label_name: 'sample',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High')
     visit '/tasks'  
      
-    click_link "Show"
+    find("img[alt='Edit']").click
 
     expect(page).to have_content'sample'
     

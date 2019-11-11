@@ -6,20 +6,21 @@ class TasksController < ApplicationController
     @search = Task.search(params[:q])
     if params[:q]
     # @tasks = Task.search(params[:search]).order("created_at DESC")
-      @tasks = @search.result
+      @tasks = @search.result.page(params[:page]) 
     elsif params[:sort_with_created_at]
-      @tasks = Task.where.not(status: "finished").order('created_at DESC').page(params[:page])
+      @tasks = Task.order('created_at DESC').page(params[:page]) 
+      @tasks = Task.all.order("created_at DESC").page(params[:page])
     elsif params[:sort_with_deadline]
-      @tasks = Task.where.not(status: "finished").order('deadline ASC').page(params[:page])
+      @tasks = Task.order('deadline ASC').page(params[:page]) 
     else params[:sort_with_priority]
-      @tasks = Task.where.not(status: "finished").order('priority ASC').page(params[:page])
+      @tasks = Task.order('priority ASC').page(params[:page]) 
     end
     # @search = Task.search(params[:q])
     # @tasks = @search.result
-    # @task = Task.all.order("created_at DESC").page(params[:page]) 
-    @tasks = Task.order('created_at DESC').where(status:"not started").or(Task.order('created_at DESC').where(status: "on going")).page(params[:page])
-    @finished = Task.where(status: "finished").order('created_at DESC')
-    @progress = Task.where(status:"not started").or(Task.where(status: "on going")).size
+    # @tasks = Task.all.order("created_at DESC").page(params[:page]) 
+    # @tasks = Task.order('created_at DESC').where(status:"not started").or(Task.order('created_at DESC').where(status: "on going")).page(params[:page])
+    # @finished = Task.where(status: "finished").order('created_at DESC')
+    # @progress = Task.where(status:"not started").or(Task.where(status: "on going")).size
   end
 
   def sorted
