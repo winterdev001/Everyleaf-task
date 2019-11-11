@@ -3,7 +3,7 @@ class Task < ApplicationRecord
     validates :label_name, presence: true  
     validates :start_date, presence: true  
     validates :deadline, presence: true 
-    validates :status, presence: true   
+    # validates :status, presence: true   
     
 
     # def self.search(search)
@@ -14,6 +14,6 @@ class Task < ApplicationRecord
     #   end
     # end
 
-    paginates_per 2
+    paginates_per 4
 
 end
