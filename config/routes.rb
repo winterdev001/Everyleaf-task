@@ -9,4 +9,7 @@ Rails.application.routes.draw do
     #  match '/deadline' => 'tasks#deadline', via: :get
     resources :tasks 
   # end
+  resources :users
+  resources :sessions
+  # get '/new', to: 'sessions#new'
 end

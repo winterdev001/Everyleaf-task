@@ -10,4 +10,14 @@ class ApplicationController < ActionController::Base
   # def default_url_options(options = {})
   #   { locale: I18n.locale}.merge options
   # end
+  protect_from_forgery with: :exception
+  include SessionsHelper 
+
+  def current_user
+        @current_user ||= User.find_by(id: session[:user_id])
+    end
+
+    def logged_in?
+        current_user.present?
+    end
 end
