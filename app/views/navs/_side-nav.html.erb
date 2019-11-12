@@ -4,7 +4,13 @@
       <ul>
         <li>
           <%= link_to "New Task",new_task_path,class:" text-light mt-3 nav-link" %>          
-        </li>       
+        </li>
+        <li>
+          <%= link_to "Account",user_path(current_user.id),class:" text-light mt-3 nav-link" %>           
+        </li> 
+        <div>
+          <%= link_to "Logout", session_path(current_user.id), method: :delete, class:"btn btn-dark text-light mt-3 "%>     
+        </div>      
       </ul>
     </nav>
   </aside>

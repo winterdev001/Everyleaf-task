@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-
+  before_action :authenticate
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -7,13 +7,18 @@ class TasksController < ApplicationController
     if params[:q]
     # @tasks = Task.search(params[:search]).order("created_at DESC")
       @tasks = @search.result.page(params[:page]) 
+      @tasks = Task.all.order("created_at DESC").page(params[:page])
     elsif params[:sort_with_created_at]
       @tasks = Task.order('created_at DESC').page(params[:page]) 
       @tasks = Task.all.order("created_at DESC").page(params[:page])
     elsif params[:sort_with_deadline]
       @tasks = Task.order('deadline ASC').page(params[:page]) 
-    else params[:sort_with_priority]
+      @tasks = Task.all.order("deadline ASC").page(params[:page])
+    elsif params[:sort_with_priority]
       @tasks = Task.order('priority ASC').page(params[:page]) 
+      @tasks = Task.order('priority ASC').page(params[:page])
+    else
+      @tasks = Task.all.order("created_at DESC").page(params[:page])
     end
     # @search = Task.search(params[:q])
     # @tasks = @search.result
@@ -40,6 +45,8 @@ class TasksController < ApplicationController
 
   def create    
     @task = Task.new(task_params)  
+    @task = current_user.tasks.build(task_params)
+    @user = current_user
     if @task.save
       redirect_to root_path, notice: 'Task was successfully created.' 
     else

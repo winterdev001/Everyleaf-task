@@ -17,11 +17,17 @@
 
   <body>
     <header>
+    <% if logged_in?%>
       <%= render "navs/top-nav" %>
+    <%else%>
+    <%end%>
     </header>
     <div class="row">
-      <div class="col-md-2 side-nav">  
-        <%= render 'navs/side-nav'%>
+      <div class="col-md-2 side-nav">
+        <% if logged_in?%>  
+          <%= render 'navs/side-nav'%>
+        <%else%>
+        <%end%>
       </div>
       <div class="col-md-10 ">
         <% if flash[:notice] %>
@@ -30,8 +36,8 @@
           </div>
         <% end %>
         <% if flash[:alert] %>
-          <div class="bg-danger card col-12  d-flex justify-content-center" >
-            <p class="alert text-center"><%= alert %></p>
+          <div class="bg-danger card col-12 mt-5 d-flex justify-content-center" >
+            <p class="alert text-center "><%= alert %></p>
           </div>
         <% end %>
         <%= yield %>
