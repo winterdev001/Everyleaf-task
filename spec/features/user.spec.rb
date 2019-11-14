@@ -15,6 +15,12 @@ RSpec.feature "user management function", type: :feature do
    expect(user.name).to match("Winter")
  end
 
+ scenario "Test user details" do
+   @user= User.create!(name: 'dev', email: 'winter@gmail.com', password: 'dev123')
+   visit user_path(id: @user.id)
+   expect(page).to have_content('dev@gmail.com')
+ end
+
 end
 
 

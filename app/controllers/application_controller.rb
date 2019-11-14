@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   #   { locale: I18n.locale}.merge options
   # end
   protect_from_forgery with: :exception
-  include SessionsHelper 
+  include SessionsHelper
+  include UsersHelper 
 
   def current_user
         @current_user ||= User.find_by(id: session[:user_id])
