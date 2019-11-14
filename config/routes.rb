@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # end
   resources :users
   resources :sessions
-  # get '/new', to: 'sessions#new'
+  get '/new', to: 'users#new'
 end

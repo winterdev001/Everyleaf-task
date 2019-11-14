@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_task, only: [:show]
-
+  before_action :noaccess,only: [:new]
   
   def show
     @user = User.all      
@@ -12,11 +12,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      # Switch to the list screen and display a message saying "You have created new blog!"
-      redirect_to  tasks_path ,notice: "You have signed up successfully!"
+    if @user.save      
+        session[:user_id] = @user.id
+        redirect_to tasks_path      
     else
-      # Redraw the input form.
       render :new
     end
   end    
