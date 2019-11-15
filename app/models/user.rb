@@ -7,4 +7,15 @@ class User < ApplicationRecord
 
     before_save { self.email = email.downcase }
     has_secure_password
+
+    def self.admins
+        @users = User.all
+        @admins=0
+        @users.each do |user|
+            if user.role?
+                @admins += 1
+            end
+        end
+    return @admins
+    end
 end

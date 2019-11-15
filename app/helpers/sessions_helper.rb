@@ -13,7 +13,7 @@ module SessionsHelper
         redirect_to new_session_path
         false
     #    else
-    #     redirect_to new_user_path
+    #     redirect_to new_admin_user_path
        end
     end
 

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>All Users</h1>
+
+
+<div class="users-card mb-3">
+  <% @users.each do |user| %>
+  <div class="card bg-main mt-3 text-light" style="width:40rem;">
+    <div class="row">
+    <div class="card-body col-md-6">
+      <%# <h5 class="card-title">Card title</h5> %>
+        <p class="card-text">
+            Name: <%= user.name %><br>
+            Email: <%= user.email %><br>
+            Task: <%= user.tasks.count %>
+        </p>    
+    </div>
+    <div class="card-footer col-md-6">
+        <%= link_to 'Show', admin_user_path(user), class: "btn btn-secondary btn-block" %><br>
+        <%= link_to 'Edit', edit_admin_user_path(user), class: "btn btn-primary btn-block" %><br>
+        <%= link_to 'Destroy', admin_user_path(user), class: "btn btn-danger btn-block", method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+

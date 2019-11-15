@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center mt-5">
+  <div class="card mt-5 bg-main col-6 mt-3 text-light">
+    <p class="card-body text-center lead ">  
+       <% if current_user.role  %>    
+       Name: <%= @user.name %>  <br>
+
+       <p> <h4> <%= @user.name %>'s task:</h4>
+        <% @tasks.each do |task| %>
+        <% if @user.id == task.user_id %>
+        <div>
+        <div class="user-details mt-2 mb-2" style="border-left: 4px solid #0B0720 !important;
+          height: 3rem !important;background-color:rgba(138, 127, 168, 0.644)">
+          <% if task.task_name.present?%>
+            <span class="ml-3">Task_name: <%= task.task_name  %></span><br> 
+            <span class="ml-3">Content: <%= task.label_name %></span><br/>
+            
+          <%else%>            
+            No Task created yet....
+          <%end%>
+        </div>
+        </div>
+        <% end %>
+        <% end %>
+        <%else%>
+          Name: <%= @user.name %>  <br>
+          Email: <%= @user.email%>
+        <%end%>
+        </p>
+        <% if current_user.role  %> 
+          <%= link_to 'Back', admin_users_path , class: "btn btn-dark"%> 
+        <%else%>
+          <%= link_to 'Back', tasks_path , class: "btn btn-dark"%>
+        <%end%> 
+  </div>
+  
+</div>

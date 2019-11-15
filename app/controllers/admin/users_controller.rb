@@ -1,9 +1,17 @@
-class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
-  before_action :noaccess,only: [:new]
+class Admin::UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # before_action :noaccess,only: [:new]
+  before_action :admin_authorize, except: [:show] 
+
+  def index
+    @users = User.all
+  end
   
   def show
-    @user = User.all      
+    @tasks = Task.order(:created_at).includes(:user)    
+  end
+
+  def edit
   end
 
   def new
@@ -29,7 +37,7 @@ class UsersController < ApplicationController
         render :show
       else
         render :edit 
-      end
+      end    
   end
 
   def destroy

@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     #  match '/deadline' => 'tasks#deadline', via: :get
     resources :tasks 
   # end
-  resources :users
+  namespace :admin do
+    resources :users
+  end
   resources :sessions
-  get '/new', to: 'users#new'
+  # get '/new', to: 'users#new'
 end
