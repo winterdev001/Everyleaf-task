@@ -61,7 +61,7 @@
               <%else%>
               <%end%>
             </td>
-            <td><%=link_to image_tag("https://img.icons8.com/material-outlined/25/000000/visible.png"),task ,class:"btn btn-secondary"%></td>
+            <td><%=link_to image_tag("https://img.icons8.com/dotty/25/000000/visible.png"),task ,class:"btn btn-secondary"%></td>
             <td><%=link_to image_tag("pencil.png",alt: 'Edit'),edit_task_path(task) , class:"btn btn-primary "%></td>
             <td><%= link_to image_tag("https://img.icons8.com/windows/25/000000/trash.png"), task, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %></td>
             </tr>
