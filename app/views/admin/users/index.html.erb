@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>All Users</h1>
+
+<h1 class="text-light mt-5 text-center">All Users</h1>
 
 
 <div class="users-card mb-3">
+  <%= link_to 'Add a User', new_admin_user_path, class: " text-light btn btn-dark btn-block col-9" %><br>
   <% @users.each do |user| %>
   <div class="card bg-main mt-3 text-light" style="width:40rem;">
     <div class="row">

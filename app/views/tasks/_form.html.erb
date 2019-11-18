@@ -33,6 +33,22 @@
     <%= form.radio_button :priority, '2' %> Medium
     <%= form.radio_button :priority, '1' %> High<br />
   </div>
+  <div>
+    <% Label.all.each do |label| %>
+    <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <% if label.name.length < 2 %>
+      <label class="badge badge-pill badge-success" style = " width: auto;" > <%= label.name %> </label>
+      <%elsif label.name.length < 4%>
+      <label class="badge badge-pill badge-warning" style = " width: auto;" > <%= label.name %> </label>
+      <%elsif label.name.length < 6%>
+      <label class="badge badge-pill badge-info" style = " width: auto;" > <%= label.name %> </label>
+      <%elsif label.name.length < 8%>
+      <label class="badge badge-pill badge-secondary" style = " width: auto;" > <%= label.name %> </label>
+      <%else %>
+      <label class="badge badge-pill badge-danger" style = " width: auto;" > <%= label.name %> </label>
+      <%end%>
+    <% end %>
+  </div>
   <hr>  
   <div class="actions text-center">
     <%= form.submit  class:"btn btn-dark  "  %>     

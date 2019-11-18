@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :labels
   get 'deadlines/new'
   # get 'deadlines/new'
   # get 'deadlines/update'
@@ -13,5 +14,6 @@ Rails.application.routes.draw do
     resources :users
   end
   resources :sessions
+  resources :labels
   # get '/new', to: 'users#new'
 end

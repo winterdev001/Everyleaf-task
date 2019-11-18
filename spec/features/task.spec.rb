@@ -56,7 +56,7 @@ RSpec.feature "Task management function", type: :feature do
     @user=User.first
     Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High',user_id: @user.id)
     visit tasks_path
-    fill_in "Search by Status" , :with =>"not started"
+    fill_in "search2" , :with =>"not started"
     expect(page).to have_content "not started"
   end
 
@@ -68,7 +68,7 @@ RSpec.feature "Task management function", type: :feature do
     @user=User.first
     Task.create!( task_name: 'task_01', label_name: 'test1',start_date: '2019-10-5 1:40:00',status: 'not started', deadline: '2019-10-15 5:40:00' , priority: 'High',user_id: @user.id)
     visit tasks_path
-    fill_in "Search by Task_name or Status" , :with =>"task_01"
+    fill_in "search" , :with =>"task_01"
     expect(page).to have_content "task_01"
   end
 
@@ -76,4 +76,28 @@ RSpec.feature "Task management function", type: :feature do
     visit tasks_path
     assert Task.all.order("priority ASC")
   end
+
+  scenario "test task search by atached labels " do
+    visit  new_session_path
+    fill_in  'Email' ,  :with => 'winter@gmail.com'  
+    fill_in  'Password' ,  :with => 'winter123'
+    click_on  'Log in'
+    visit new_label_path
+    fill_in 'Name', with: 'label1 '
+    fill_in 'Content', with: 'content1 '
+    click_on 'Create Label'
+    visit new_label_path
+    fill_in 'Name', with: 'label1 '
+    fill_in 'Content', with: ' content2'
+    click_on 'Create Label'
+    @task = Task.first
+    @label1 = Label.first
+    @label2 = Label.last
+    visit tasks_path
+    fill_in  'search3' ,  with: 'label1'
+    click_on 'search by label'
+
+  end
+  
 end
+

@@ -1,0 +1,32 @@
+<%= form_with(model: label, local: true) do |form| %>
+<div class="main">
+ <% if label.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(label.errors.count, "error") %> prohibited this label from being saved:</h2>
+     <ul>
+     <% label.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+     <% end %>
+     </ul>
+   </div>
+ <% end %>
+ <div class="form-group">
+   <%= form.label :name %>
+   <%= form.text_field :name,class: "form-control " %>
+ </div>
+ <div class="form-group">
+   <%= form.label :content %>
+   <%= form.text_area :content,class: "form-control " %>
+ </div>
+ <% if logged_in? %>
+ <div class="form-group">
+   <%= form.hidden_field :user_id, value: current_user.id %>
+ </div>
+ <% end %>
+ 
+ <div class="actions text-center">
+    <%= form.submit  class:"btn btn-dark  "  %>   
+    <%= link_to 'Back', labels_path, class:"btn btn-dark  "%>    
+  </div>
+<% end %>
+</div>

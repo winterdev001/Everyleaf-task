@@ -3,25 +3,24 @@ class TasksController < ApplicationController
   # before_action :authenticate, only: [:show, :edit, :update, :destroy]
 
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  def search
+    @task =task.search(params[:search])
+  end
 
   def index
-    @search = Task.search(params[:q])
-    if params[:q]
-    # @tasks = Task.search(params[:search]).order("created_at DESC")
-      @tasks = @search.result.page(params[:page]) 
-      @tasks = Task.all.order("created_at DESC").page(params[:page])
-    elsif params[:sort_with_created_at]
-      @tasks = Task.order('created_at DESC').page(params[:page]) 
-      @tasks = Task.all.order("created_at DESC").page(params[:page])
-    elsif params[:sort_with_deadline]
-      @tasks = Task.order('deadline ASC').page(params[:page]) 
-      @tasks = Task.all.order("deadline ASC").page(params[:page])
-    elsif params[:sort_with_priority]
-      @tasks = Task.order('priority ASC').page(params[:page]) 
-      @tasks = Task.order('priority ASC').page(params[:page])
-    else
-      @tasks = Task.all.order("created_at DESC").page(params[:page])
-    end
+    @search = Task.search(params[:q])    
+    @tasks = if params[:search]
+      Task.where('status LIKE ? or task_name LIKE ?', "%#{params[:search]}%","%#{params[:search]}%").page params[:page]
+      elsif params[:search1]
+        Task.where('task_name LIKE ?', "%#{params[:search1]}%").page params[:page]
+      elsif params[:search2]
+        Task.where('status LIKE ?', "%#{params[:search2]}%").page params[:page]
+      elsif params[:search3]
+        Task.joins(:labels).where('labels.name ILIKE ?', "%#{params[:search3]}%").page params[:page]
+      else
+        #@tasks = Task.all.order('created_at desc').page params[:page]
+        @tasks = Task.order_list(params[:sort_by]).page params[:page]
+      end
     # @search = Task.search(params[:q])
     # @tasks = @search.result
     # @tasks = Task.all.order("created_at DESC").page(params[:page]) 
@@ -75,7 +74,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:task_name,:label_name, :start_date, :deadline, :status, :priority)    
+    params.require(:task).permit(:task_name,:label_name, :start_date, :deadline, :status, :priority, :search, :search1, :search2, :search3, :labels, label_ids:[])    
   end  
 
 end

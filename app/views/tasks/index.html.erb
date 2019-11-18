@@ -1,91 +1,105 @@
-<div class="content">
-    <div class="row mt-5">    
-    <div class="col-md-12 ">
-      <%= search_form_for @search do |f|%>
-        <div class="container">
-        <div class="card bg-main text-light" >
-          <div class="card-body row search">
-          <div class="form-group col-md-3">
-            <%= f.label :task_name_cont, "Search by Task_name"%>          
-            <%= f.text_field :task_name_cont ,class:"form-control"%>
-            </div>
-            <div class="form-group col-md-3">
-              <%= f.label :status_cont, "Search by Status"%>
-              <%= f.text_field :status_cont ,class:"form-control" %>
-            </div>
-            <div class="form-group col-md-6">
-              <%= f.label :task_name_or_status_cont, "Search by Task_name or Status"%>
-              <%= f.text_field :task_name_or_status_cont ,class:"form-control" %>
-            </div>
-          </div>
-          <div class="actions"><%= f.submit "Search", class:"btn btn-dark btn-block" %></div>
-        </div>
-        </div>
-      <%end%>
-    </div>    
-  </div>
-  <div class="">
-    <div class="container">
-    <table class="table table-sm all-tasks mt-2 text-light">
-        <thead>
+<div class="container tasks">
+<table class="table table-sm all-tasks  text-light">
+    <thead>
+    <tr>
+        <th>Task name</th>
+        <th>Label name</th>
+        <th>Starts on</th>
+        <th>Deadline</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Labels</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @tasks.each do |task|%> 
+      <%if task.user_id == current_user.id%>
         <tr>
-            <th>Task name</th>
-            <th>Label name</th>
-            <th>Starts on</th>
-            <th>Deadline</th>
-            <th>Status</th>
-            <th>Priority</th>
-            <th>View</th>
-            <th>Edit</th>
-            <th>Delete</th>
+        <td><%= task.task_name%></td>
+        <td><%= task.label_name%></td>
+        <td><%= task.start_date.strftime("%B %e, %Y")%></td>
+        <td>
+            <%= task.deadline.strftime("%B %e, %Y")  %>               
+        </td>
+        <td><%= task.status%></td>
+        <td>
+          <%if task.priority == "1"%>
+            <%=  task.priority = "High"%>
+          <%elsif task.priority == "2"%>
+            <%=  task.priority = "Medium"%>
+          <%elsif task.priority == "3"%>
+            <%=  task.priority = "Low"%>
+          <%else%>
+          <%end%>
+        </td>
+        <td>
+          <%= task.labels.count%>
+        </td>
+        <td><%=link_to image_tag("https://img.icons8.com/dotty/25/000000/visible.png"),task ,class:"btn btn-secondary"%></td>
+        <td><%=link_to image_tag("pencil.png",alt: 'Edit'),edit_task_path(task) , class:"btn btn-primary "%></td>
+        <td><%= link_to image_tag("https://img.icons8.com/windows/25/000000/trash.png"), task, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %></td>
         </tr>
-        </thead>
-        <tbody>
-        <% @tasks.each do |task|%> 
-          <%if task.user_id == current_user.id%>
-            <tr>
-            <td><%= task.task_name%></td>
-            <td><%= task.label_name%></td>
-            <td><%= task.start_date.strftime("%B %e, %Y")%></td>
-            <td>
-                <%= task.deadline.strftime("%B %e, %Y")  %>               
-            </td>
-            <td><%= task.status%></td>
-            <td>
-              <%if task.priority == "1"%>
-                <%=  task.priority = "High"%>
-              <%elsif task.priority == "2"%>
-                <%=  task.priority = "Medium"%>
-              <%elsif task.priority == "3"%>
-                <%=  task.priority = "Low"%>
-              <%else%>
-              <%end%>
-            </td>
-            <td><%=link_to image_tag("https://img.icons8.com/material-outlined/25/000000/visible.png"),task ,class:"btn btn-secondary"%></td>
-            <td><%=link_to image_tag("pencil.png",alt: 'Edit'),edit_task_path(task) , class:"btn btn-primary "%></td>
-            <td><%= link_to image_tag("https://img.icons8.com/windows/25/000000/trash.png"), task, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %></td>
-            </tr>
-            <%else%>
-              
-            <%end%>
+        <%else%>
+          
         <%end%>
-        </tbody>        
-    </table> 
-    <%= paginate @tasks%> 
-    </div>  
-    <div class="col-md-12">          
-      <span class="text-light">Sort by:</span> &nbsp;
-      <div class="row">
-        <div class="col-md-4">
-          <%= link_to 'Created Date ',tasks_path(sort_with_created_at:"true") , class:"btn btn-light btn-block" %>
-        </div>
-        <div class="col-md-4">
-          <%= link_to 'Deadline',tasks_path(sort_with_deadline:"true") , class:"btn btn-light btn-block"%>  
-        </div>
-        <div class="col-md-4">
-          <%= link_to 'Priority',tasks_path(sort_with_priority:"true") , class:"btn btn-light btn-block"%>  
-        </div>
+    <%end%>
+    </tbody>        
+</table> 
+<%= paginate @tasks%> 
+</div>  
+<div class="col-md-12">          
+  <span class="text-light mt-3">Sort by:</span> &nbsp;
+  <div class="row ml-5">
+    <div col="col-md-4">
+      <%= link_to "Name", tasks_path(sort_by: "task_name"),class:'btn btn-outline-light btn-block ' %>
+    </div>
+    <div col="col-md-4">
+      <%= link_to "Deadline", tasks_path(sort_by: "deadline"),class:'btn btn-outline-light btn-block ' %>
+    </div>
+    <div col="col-md-4">
+      <%= link_to "Priority", tasks_path(sort_by: "priority"),class:'btn btn-outline-light btn-block ' %>
+    </div>
+  </div>
+</div>
+</div>
+ 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-main">
+        <button type="button" class="close bg-danger" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+         <div class="" style="width:30rem;"> 
+          <div>         
+            <%= form_tag(tasks_path, method: :get, class:"form-inline") do %>
+            <%= text_field_tag :search, params[:search], placeholder:'search by Name Or Status', class:"form-control mr-sm-2" %>
+            <%= submit_tag 'search by Name Or Status', class:"btn btn-outline-dark col-6", name: nil %>
+            <% end %><br>
+          </div>  
+            <%= form_tag(tasks_path, method: :get, class:"form-inline") do %>
+            <%= text_field_tag :search1, params[:search1], placeholder:'search by Name', class:"form-control mr-sm-2" %>
+            <%= submit_tag 'search by Name', class:"btn btn-outline-dark col-6", name: nil %>
+            <% end %><br>
+            
+            <%= form_tag(tasks_path, method: :get, class:"form-inline") do %>
+            <%= text_field_tag :search2, params[:search2], placeholder:'search by Status', class:"form-control mr-sm-2" %>
+            <%= submit_tag 'search by Status', class:"btn btn-outline-dark col-6 ", name: nil %>
+            <% end %><br>
+            
+            <%= form_tag(tasks_path, method: :get, class:"form-inline") do %>
+            <%= text_field_tag :search3, params[:search3], placeholder:'search by label', class:"form-control mr-sm-2" %>
+            <%= submit_tag 'search by label', class:"btn btn-outline-dark col-6", name: nil %>
+            <% end %>          
+        </div>
+ 
     </div>
   </div>
 </div>
